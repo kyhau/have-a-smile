@@ -1,9 +1,11 @@
 """
 Dilbert
 """
+from __future__ import print_function
 import random
 import urllib
 import re
+
 
 def random_dilbert(logger):
     """
@@ -11,7 +13,7 @@ def random_dilbert(logger):
     """
     logger.debug('Running random_dilbert ...')
 
-    year = random.choice(['2013', '2014', '2015'])
+    year = random.choice(['2014', '2015', '2016'])
     month = random.choice(range(1, 13))
     day = random.choice(range(1, 29))
 
@@ -31,4 +33,4 @@ if __name__ == "__main__":
     import logging
     logging.basicConfig(level=logging.DEBUG)
     logger = logging.getLogger(__name__)
-    random_dilbert(logger)
+    print(random_dilbert(logger))

@@ -1,6 +1,7 @@
 """
 xkcd
 """
+from __future__ import print_function
 import xkcd
 
 
@@ -28,4 +29,4 @@ if __name__ == "__main__":
     import logging
     logging.basicConfig(level=logging.DEBUG)
     logger = logging.getLogger(__name__)
-    random_xkcd(logger)
+    print(random_xkcd(logger))

@@ -1,6 +1,7 @@
 """
 Fortune and cowsay
 """
+from __future__ import print_function
 import subprocess
 
 
@@ -31,4 +32,4 @@ if __name__ == '__main__':
     import logging
     logging.basicConfig(level=logging.DEBUG)
     logger = logging.getLogger(__name__)
-    fortune_cow(logger)
+    print(fortune_cow(logger))
