@@ -1,40 +1,40 @@
-from __future__ import print_function
+"""
+Retrieve random/latest DevOps Reactions image
+"""
+import logging
+import urllib3
+from bs4 import BeautifulSoup
 
-import urllib2
-from BeautifulSoup import BeautifulSoup
+logging.getLogger().setLevel(logging.DEBUG)
+logging.getLogger('urllib3.connectionpool').setLevel(logging.CRITICAL)
 
 
-# Ref: https://github.com/leandrotoledo/gae-devops-reaction-telegram-bot/blob/master/devops_reactions.py
-class DevOpsReactions():
+def random_dev_ops_reactions(latest=False):
     URL = 'http://devopsreactions.tumblr.com/%s'
 
-    @classmethod
-    def _getRSS(cls):
-        url = cls.URL % 'rss'
-        data = urllib2.urlopen(url).read()
-        return [i.find('guid').text for i in BeautifulSoup(data).findAll('item')]
+    http = urllib3.PoolManager()
+ 
+    def get_latest(http):
+        url = URL % 'rss'
+        data = http.request('GET', url).data
+        return [i.find('guid').text for i in BeautifulSoup(data, 'html.parser').find_all('item')][0]
 
-    @classmethod
-    def _getPost(cls, url):
-        html = urllib2.urlopen(url).read()
-        soup = BeautifulSoup(html, convertEntities=BeautifulSoup.HTML_ENTITIES)
-        try:
-            title = soup.find('div', attrs={'class': 'post_title'}).text.encode('utf-8')
-            image_url = soup.find('div', attrs={'class': 'item text'}).p.img['src']
-        except TypeError:
-            title = ''
-            image_url = soup.find('div', attrs={'class': 'item text'}).img['src']
-        return {'title': title, 'image_url': image_url}
+    url = get_latest(http) if latest is True else URL % 'random'
 
-    @classmethod
-    def latest(cls):
-        return cls._getPost(url=cls._getRSS()[0])
+    html = http.request('GET', url).data
+    soup = BeautifulSoup(html, 'html.parser')
 
-    @classmethod
-    def random(cls):
-        return cls._getPost(url=cls.URL%'random')
+    try:
+        title = soup.find('div', attrs={'class': 'post_title'}).text
+        image_url = soup.find('div', attrs={'class': 'item text'}).p.img['src']
+
+    except TypeError:
+        title = ''
+        image_url = soup.find('div', attrs={'class': 'item text'}).img['src']
+
+    return {'title': title, 'image_url': image_url}
 
 
 if __name__ == "__main__":
-    print(DevOpsReactions.random())
-    print(DevOpsReactions.latest())
+    print(random_dev_ops_reactions(latest=False))
+    print(random_dev_ops_reactions(latest=True))

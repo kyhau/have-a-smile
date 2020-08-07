@@ -1,36 +1,35 @@
 """
-Dilbert
+Retrieve random/latest Dilbert image
 """
-from __future__ import print_function
-import random
-import urllib
+import logging
 import re
+import urllib3
+from datetime import datetime, timedelta
+from random import randrange
+
+logging.getLogger().setLevel(logging.DEBUG)
+logging.getLogger('urllib3.connectionpool').setLevel(logging.CRITICAL)
 
 
-def random_dilbert(logger):
-    """
-    Retrieve url of a random dilbert
-    """
-    logger.debug('Running random_dilbert ...')
+def random_dilbert(lookup_days=400):
+    """Retrieve url of a random dilbert"""
+    logging.debug('Running random dilbert...')
 
-    year = random.choice(['2014', '2015', '2016'])
-    month = random.choice(range(1, 13))
-    day = random.choice(range(1, 29))
+    http = urllib3.PoolManager()
+
+    dt = datetime.now() - timedelta(days=randrange(lookup_days))
+    dt_str = dt.strftime('%Y-%m-%d')
+    logging.debug(f'Random date: {dt_str}')
 
     try:
-        url_to_dilbert_page = 'http://www.dilbert.com/%s-%s-%s/' % (year, month, day)
-        page_contents = urllib.urlopen(url_to_dilbert_page).read()
-        image_url = re.search('<meta name="twitter:image" content="(.*)">', page_contents).group(1) + '.png'
-        return image_url
+        url_to_dilbert_page = f'https://dilbert.com/strip/{dt_str}/'
+        page_contents = http.request('GET', url_to_dilbert_page).data.decode('utf-8')
+        return re.search('<meta name="twitter:image" content="(.*)">', page_contents).group(1) + '.png'
 
     except Exception as e:
-        logger.error(e)
+        logging.error(e)
     return None
 
 
 if __name__ == "__main__":
-    # debug-only
-    import logging
-    logging.basicConfig(level=logging.DEBUG)
-    logger = logging.getLogger(__name__)
-    print(random_dilbert(logger))
+    print(random_dilbert())

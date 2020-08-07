@@ -1,2 +1,2 @@
-BeautifulSoup>=3.2.1
-xkcd>=2.4.1
+beautifulsoup4
+xkcd-wrapper
