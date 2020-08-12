@@ -1,0 +1,3 @@
+#!/bin/sh
+set -euo pipefail
+sudo apt-get install fortunes fortune-mod cowsay
