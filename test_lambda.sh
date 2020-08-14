@@ -21,8 +21,8 @@ sleep 2
 
 test_topic "devopsreaction"
 test_topic "dilbert"
-test_topic "fortunecow"
 test_topic "xkcd"
+test_topic "help"
 
 rm event.json
 rm response.json

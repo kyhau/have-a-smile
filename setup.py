@@ -6,8 +6,8 @@ with open("README.md") as fp:
 
 
 setuptools.setup(
-    name="smile",
-    version="0.1.0",
+    name="cdk_smile",
+    version="0.1.1",
 
     description="A CDK Python app",
     long_description=long_description,
@@ -15,8 +15,8 @@ setuptools.setup(
 
     author="Kay Hau",
 
-    package_dir={"": "smile"},
-    packages=setuptools.find_packages(where="smile"),
+    package_dir={"": "cdk_smile"},
+    packages=setuptools.find_packages(where="cdk_smile"),
 
     install_requires=[
         "aws-cdk.core",
