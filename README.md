@@ -1,12 +1,13 @@
 # Smile
 
-A lambda function get random message/image from
+Some simple scripts to get random message/image from
 1. [DevOps Reactions](http://devopsreactions.tumblr.com/)
 1. [Dilbert](https://dilbert.com)
 1. fortune | cowsay
 1. [xkcd](https://xkcd.com/)
 
-- Support deployment as AWS Lambda Function with CDK.
+
+- Support deployment as AWS Lambda Function with CDK for DevOps Reactions, Dilbert and xkcd.
 - Can be run separatedly as a Python function.
 
 ## Steps
