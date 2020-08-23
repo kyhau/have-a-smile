@@ -1,5 +1,6 @@
 import json
 import logging
+
 from devopsreaction import random_dev_ops_reactions
 from dilbert import random_dilbert
 from xkcd import random_xkcd
@@ -12,14 +13,16 @@ def main(event, context):
 
     message = None
 
-    topic = event.get("body", {}).get("topic")
+    topic = event.get("topic")
+    latest = event.get("latest", False)
+
     if topic is not None:
         if topic == "devopsreaction":
-            message = random_dev_ops_reactions()
+            message = random_dev_ops_reactions(latest=latest)
         elif topic == "dilbert":
-            message = random_dilbert()
+            message = random_dilbert(lookup_days=1 if latest else 400)
         elif topic == "xkcd":
-            message = random_xkcd()
+            message = random_xkcd(latest=latest)
 
     logging.info(message)
 
