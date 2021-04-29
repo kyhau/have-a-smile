@@ -1,0 +1,13 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "19:00"
+    timezone: Australia/ACT
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: aiohttp
+    versions:
+    - 3.7.4
