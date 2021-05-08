@@ -1,13 +1,12 @@
 import setuptools
 
-
 with open("README.md") as fp:
     long_description = fp.read()
 
 
 setuptools.setup(
     name="cdk_smile",
-    version="0.1.1",
+    version="0.1.2.dev",
 
     description="A CDK Python app",
     long_description=long_description,
@@ -19,8 +18,8 @@ setuptools.setup(
     packages=setuptools.find_packages(where="cdk_smile"),
 
     install_requires=[
-        "aws-cdk.core",
-        "aws-cdk.aws-lambda",
+        "aws-cdk-lib>=2.0.0rc1",
+        "constructs>=10.0.0",
     ],
 
     python_requires=">=3.7",

@@ -1,8 +1,8 @@
 """
 Create/deploy a Lambda Function
 """
-from aws_cdk.core import Construct, Duration, Stack
-from aws_cdk import aws_lambda
+from aws_cdk import Duration, Stack, aws_lambda
+from constructs import Construct
 
 
 # Main application stack
@@ -13,7 +13,7 @@ class SmileStack(Stack):
         function = aws_lambda.Function(
             self, "SmileFunction",
             function_name="SmileFunction",
-            code=aws_lambda.Code.asset("package"),
+            code=aws_lambda.Code.from_asset("package"),
             handler="handler.main",
             timeout=Duration.minutes(5),
             runtime=aws_lambda.Runtime.PYTHON_3_8,

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
-from aws_cdk.core import App, Environment
+from aws_cdk import App, Environment
 from cdk_smile.lambda_smile import SmileStack
 
 
