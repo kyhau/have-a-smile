@@ -1,8 +1,9 @@
-name: dependabot-auto-approve-merge
+name: Dependabot auto-approve auto-merge
 on: pull_request
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   dependabot:
