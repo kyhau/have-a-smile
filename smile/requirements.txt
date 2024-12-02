@@ -1,4 +1,4 @@
-aiohttp==3.11.7
+aiohttp==3.11.9
 beautifulsoup4==4.12.3
 requests
 xkcd-wrapper[sync]==1.0.2
