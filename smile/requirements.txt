@@ -1,5 +1,5 @@
 aiohttp==3.13.0
-beautifulsoup4==4.14.0
+beautifulsoup4==4.14.2
 requests
 xkcd-wrapper[sync]==1.0.2
 urllib3>=2.5.0 # not directly required, pinned by Snyk to avoid a vulnerability
